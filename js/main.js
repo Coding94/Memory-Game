@@ -204,7 +204,7 @@ function resetTimer() {
 async function displayScores() {
   const ul = document.getElementById("high-scores");
   ul.innerHTML = "";
-    ul.innerHTML = `<li class="loading-score">Loading scores...</li>`; // Show loading message first
+    ul.innerHTML = `Loading scores...`; // Show loading message first
 
   try {
     const res = await fetch(`${SERVER_URL}/scores`);
