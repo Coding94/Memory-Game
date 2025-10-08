@@ -1,5 +1,8 @@
  displayScores();
 
+// GLOBAL SCORE SERVER URL — must be at the very top of main.js
+const SERVER_URL = "https://memory-game-update.onrender.com";
+
 // Select the game board
 const board = document.querySelector(".game-board");
 
