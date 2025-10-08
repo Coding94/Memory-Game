@@ -1,15 +1,7 @@
-// Firebase Firestore functions
-import { 
-  collection, 
-  getDocs, 
-  addDoc, 
-  query, 
-  orderBy, 
-  limit 
-} from "firebase/firestore";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+import { getFirestore, collection, getDocs, addDoc, query, orderBy, limit } 
+  from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
-// Your initialized Firestore database
-import { db } from "./firebase"; // adjust path if your firebase.js is elsewhere
 
 
 
