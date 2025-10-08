@@ -235,7 +235,7 @@ function gameEnded() {
 // Display scores
 // Display top scores from Firebase, fallback to LocalStorage
 async function displayScores() {
-  const scoreList = document.getElementById("score-list");
+  const scoreList = document.getElementById("high-score");
   scoreList.innerHTML = "";
 
   try {
