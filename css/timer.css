@@ -25,6 +25,11 @@
 .loading-score {
   position: absolute;
 }
+
+.loading-score {
+  color:red
+  position: absolute;
+}
   
 
 #high-scores {
