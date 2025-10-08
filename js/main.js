@@ -1,4 +1,6 @@
- displayScores();
+import { db } from "./firebase.js"; // import Firestore instance
+
+displayScores();
 
 // Select the game board
 const board = document.querySelector(".game-board");
