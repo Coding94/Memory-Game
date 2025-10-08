@@ -229,44 +229,49 @@ function gameEnded() {
 // ===== HIGH SCORES =====
 
 // Display scores
-function displayScores() {
-  const scores = JSON.parse(localStorage.getItem("highScores")) || [];
+async function displayScores() {
   const ul = document.getElementById("high-scores");
   ul.innerHTML = "";
 
-scores.forEach((score, index) => {
-  const li = document.createElement("li");
+  try {
+    const res = await fetch('http://localhost:3000/scores'); // your Node server endpoint
+    const scores = await res.json();
 
-  // Index span (fixed width)
-  const indexSpan = document.createElement("span");
-  indexSpan.classList.add("score-index");
-  indexSpan.textContent = `${index + 1}.`;
+    scores.forEach((score, index) => {
+      const li = document.createElement("li");
 
-  // Time span
-  const timeSpan = document.createElement("span");
-  timeSpan.classList.add("score-time");
-  timeSpan.textContent = formatTime(score.time);
+      const indexSpan = document.createElement("span");
+      indexSpan.classList.add("score-index");
+      indexSpan.textContent = `${index + 1}.`;
 
-  // Append index, name, and time
-  li.appendChild(indexSpan);
-  li.appendChild(document.createTextNode(` ${score.name}`));
-  li.appendChild(timeSpan);
+      const timeSpan = document.createElement("span");
+      timeSpan.classList.add("score-time");
+      timeSpan.textContent = formatTime(score.time);
 
-  document.getElementById("high-scores").appendChild(li);
-});
+      li.appendChild(indexSpan);
+      li.appendChild(document.createTextNode(` ${score.name}`));
+      li.appendChild(timeSpan);
 
+      ul.appendChild(li);
+    });
+  } catch (err) {
+    console.error("Could not load scores from server:", err);
+  }
 }
 
-// Add new score
-function saveScore(name, time) {
-  let scores = JSON.parse(localStorage.getItem("highScores")) || [];
-
-  scores.push({ name, time });
-  scores.sort((a, b) => a.time - b.time); // lowest time first
-  scores = scores.slice(0, 10); // keep top 10
-
-  localStorage.setItem("highScores", JSON.stringify(scores));
-  displayScores();
+// Save new score to the server
+async function saveScore(name, time) {
+  try {
+    await fetch('http://localhost:3000/scores', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, time })
+    });
+    // Refresh the displayed scores
+    displayScores();
+  } catch (err) {
+    console.error("Could not save score to server:", err);
+  }
 }
   
 
