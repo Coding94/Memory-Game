@@ -233,37 +233,47 @@ function gameEnded() {
 // ===== HIGH SCORES =====
 
 // Display scores
-// Display top scores from Firebase, fallback to LocalStorage
+function renderScores(scores) {
+  const scoreList = document.getElementById("high-scores");
+  scores.forEach((s, index) => {
+    const li = document.createElement("li");
+
+    const indexSpan = document.createElement("span");
+    indexSpan.classList.add("score-index");
+    indexSpan.textContent = `${index + 1}.`;
+
+    const timeSpan = document.createElement("span");
+    timeSpan.classList.add("score-time");
+    timeSpan.textContent = formatTime(s.time);
+
+    li.appendChild(indexSpan);
+    li.appendChild(document.createTextNode(` ${s.name}`));
+    li.appendChild(timeSpan);
+
+    scoreList.appendChild(li);
+  });
+}
+
 async function displayScores() {
   const scoreList = document.getElementById("high-scores");
   scoreList.innerHTML = "";
 
   try {
-    // 1️⃣ Fetch top 10 scores from Firebase, sorted by time
     const snapshot = await db.collection("scores")
       .orderBy("time")
       .limit(10)
       .get();
 
     const globalScores = snapshot.docs.map(doc => doc.data());
-
-    globalScores.forEach(s => {
-      const li = document.createElement("li");
-      li.textContent = `${s.name}: ${formatTime(s.time)}`;
-      scoreList.appendChild(li);
-    });
+    renderScores(globalScores);
 
   } catch (err) {
-    // 2️⃣ If offline or Firebase fails, use LocalStorage
     console.error("Using local scores (offline):", err);
     const localScores = JSON.parse(localStorage.getItem("highScores")) || [];
-    localScores.forEach(s => {
-      const li = document.createElement("li");
-      li.textContent = `${s.name}: ${formatTime(s.time)}`;
-      scoreList.appendChild(li);
-    });
+    renderScores(localScores);
   }
 }
+
 
 
 // Add new score
