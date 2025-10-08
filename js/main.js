@@ -1,5 +1,6 @@
-import { db } from './firebase.js'; // Import Firestore
-import { collection, addDoc, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+import { db } from './firebase.js';
+import { collection, getDocs, addDoc, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
 
 displayScores();
 
@@ -231,75 +232,77 @@ function gameEnded() {
 // ===== HIGH SCORES =====
 
 // Display scores
-function renderScores(scores) {
-  const scoreList = document.getElementById("high-scores");
-  scores.forEach((s, index) => {
-    const li = document.createElement("li");
-
-    const indexSpan = document.createElement("span");
-    indexSpan.classList.add("score-index");
-    indexSpan.textContent = `${index + 1}.`;
-
-    const timeSpan = document.createElement("span");
-    timeSpan.classList.add("score-time");
-    timeSpan.textContent = formatTime(s.time);
-
-    li.appendChild(indexSpan);
-    li.appendChild(document.createTextNode(` ${s.name}`));
-    li.appendChild(timeSpan);
-
-    scoreList.appendChild(li);
-  });
-}
-
 export async function displayScores() {
   const scoreList = document.getElementById("high-scores");
   scoreList.innerHTML = "";
 
   try {
-    const snapshot = await db.collection("scores")
-      .orderBy("time")
-      .limit(10)
-      .get();
+    const q = query(collection(db, "scores"), orderBy("time"), limit(10));
+    const snapshot = await getDocs(q);
 
-    const globalScores = snapshot.docs.map(doc => doc.data());
-
-    globalScores.forEach(s => {
+    snapshot.docs.forEach((doc, index) => {
+      const s = doc.data();
       const li = document.createElement("li");
-      li.textContent = `${s.name}: ${formatTime(s.time)}`;
+
+      const indexSpan = document.createElement("span");
+      indexSpan.classList.add("score-index");
+      indexSpan.textContent = `${index + 1}.`;
+
+      const timeSpan = document.createElement("span");
+      timeSpan.classList.add("score-time");
+      timeSpan.textContent = formatTime(s.time);
+
+      li.appendChild(indexSpan);
+      li.appendChild(document.createTextNode(` ${s.name}`));
+      li.appendChild(timeSpan);
+
       scoreList.appendChild(li);
     });
 
   } catch (err) {
     console.error("Using local scores (offline):", err);
     const localScores = JSON.parse(localStorage.getItem("highScores")) || [];
-    localScores.forEach(s => {
+    localScores.forEach((s, index) => {
       const li = document.createElement("li");
-      li.textContent = `${s.name}: ${formatTime(s.time)}`;
+
+      const indexSpan = document.createElement("span");
+      indexSpan.classList.add("score-index");
+      indexSpan.textContent = `${index + 1}.`;
+
+      const timeSpan = document.createElement("span");
+      timeSpan.classList.add("score-time");
+      timeSpan.textContent = formatTime(s.time);
+
+      li.appendChild(indexSpan);
+      li.appendChild(document.createTextNode(` ${s.name}`));
+      li.appendChild(timeSpan);
+
       scoreList.appendChild(li);
     });
   }
 }
 
-
 // Add new score
 // Save score both locally and to Firebase
-function saveScore(name, time) {
+export async function saveScore(name, time) {
   const score = { name, time, date: new Date() };
 
-  // 1️⃣ Save to LocalStorage (fallback)
+  // Save to localStorage
   let highScores = JSON.parse(localStorage.getItem("highScores")) || [];
   highScores.push(score);
   highScores.sort((a, b) => a.time - b.time);
-  highScores = highScores.slice(0, 10); // keep top 10
+  highScores = highScores.slice(0, 10);
   localStorage.setItem("highScores", JSON.stringify(highScores));
 
-  // 2️⃣ Save to Firebase (universal)
-  db.collection("scores").add(score)
-    .then(() => console.log("Score saved to Firebase"))
-    .catch(err => console.error("Error saving to Firebase:", err));
+  // Save to Firebase
+  try {
+    await addDoc(collection(db, "scores"), score);
+    console.log("Score saved to Firebase");
+  } catch (err) {
+    console.error("Error saving to Firebase:", err);
+  }
 
-  // 3️⃣ Update leaderboard display
+  // Update display
   displayScores();
 }
   
