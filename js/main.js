@@ -1,4 +1,5 @@
-import { db } from "./firebase.js"; // import Firestore instance
+import { db } from './firebase.js'; // Import Firestore
+import { collection, addDoc, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 displayScores();
 
