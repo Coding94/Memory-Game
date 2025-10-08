@@ -206,7 +206,6 @@ function resetTimer() {
       createBoard(shuffle([...cardsArray, ...cardsArray]));
     }
   }, 500);
-}
 
 
 // SCORE
