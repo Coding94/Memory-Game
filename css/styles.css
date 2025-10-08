@@ -1,0 +1,105 @@
+@import 'timer.css';
+
+/* -------------------- BODY & TITLE -------------------- */
+body {
+  background-color: #2f573b;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.title {
+  text-align: center;
+  font-size: 2em;
+  color: #f0f0f0;
+  margin-top: 20px;
+}
+
+/* -------------------- GAME -------------------- */
+
+.GAME{
+  display: flex;
+  margin: 30px;
+}
+
+
+/* -------------------- GAME BOARD -------------------- */
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(6, 80px); /* 6 columns */
+  gap: 15px;
+  margin: 20px 120px;
+  width: max-content;
+  background-color: #6a8e64;
+  padding: 20px;
+  border-radius: 10px;
+
+    /* Add shadow like cards */
+  box-shadow: 2px 2px 6px #333;
+}
+
+/* -------------------- CARD CONTAINER -------------------- */
+.card {
+  position: relative;
+  width: 80px;
+  height: 100px;
+  cursor: pointer;
+  perspective: 1000px; /* 3D perspective for flip */
+}
+
+/* -------------------- CARD SIDES -------------------- */
+.card .front,
+.card .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  backface-visibility: hidden; /* hide the reverse side */
+  box-shadow: 2px 2px 6px #333;
+  transition: transform 0.6s ease;
+}
+
+/* -------------------- BACK SIDE -------------------- */
+.card .back {
+  background-color: #74654e; /* card back color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  transform: rotateY(0deg); /* default visible */
+}
+
+/* -------------------- FRONT SIDE -------------------- */
+.card .front {
+  background-color: #457d56; /* front placeholder color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  transform: rotateY(180deg); /* hidden initially */
+}
+
+/* -------------------- FLIP ANIMATION -------------------- */
+.card.flipped .back {
+  transform: rotateY(180deg); /* hide back */
+}
+
+.card.flipped .front {
+  transform: rotateY(0deg); /* show front */
+}
+
+/* MATCHED ANIMATION */
+.card.matched {
+  animation: fadeOut 0.6s forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    transform: scale(1) rotateY(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0) rotateY(0deg);
+    opacity: 0;
+  }
+}

@@ -1,0 +1,63 @@
+#timer {
+  font-family: 'Courier New', monospace; /* digital clock feel */
+  font-size: 22px;
+  font-weight: bold;
+  color: #745757;
+  background-color: #6a8e64;
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: inline-block;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  margin-top: 20px;
+   text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #2fe3b4;
+   text-align: center;  /* center timer text */
+   
+}
+
+#timer-container {
+  margin-left: 40px;
+  display: flex;
+  flex-direction: column;  /* stack children vertically */ 
+  gap: 0;         /* space between timer and best time */
+  
+}
+
+#high-scores {
+  position: relative;
+}
+
+#high-scores li {
+  
+    text-align: left;      /* name left-aligned within li */
+  list-style: none;
+  margin: 5px;
+  position: relative;         /* allow absolute positioning of time */
+  padding-right: 120px;       /* space for the time on the right */
+}
+
+#high-scores li .score-time {
+  position: absolute;
+  right: 10px;                /* distance from right edge of li */
+  top: 50%;
+  transform: translateY(-50%); /* vertically center */
+}
+
+
+#high-scores {
+  background-color: #aa7a50;
+  padding: 5px 10px;
+  color: #816767;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #2fe3b4;
+}
+
+.score-index {
+  display: inline-block;
+  width: 30px;        /* enough for 1–10 */
+  text-align: right;  /* aligns the dot neatly */
+  margin-right: 5px;
+}
+
