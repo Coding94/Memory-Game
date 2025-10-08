@@ -17,3 +17,5 @@ const cardsArray = [
   { name: "sheep", img: "images/sheep.png" }
 ];
 
+// SERVER SCORES 
+//https://memory-game-update.onrender.com/scores
