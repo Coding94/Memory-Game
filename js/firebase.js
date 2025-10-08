@@ -14,12 +14,35 @@ const firebaseConfig = {
   measurementId: "G-W76EJ9SK62"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const db = getFirestore(app);
+export const db = getFirestore(app);
 
-// Export Firestore to use in other modules
-export { db };
+// Example saveScore function
+export async function saveScore(name, time) {
+  try {
+    await addDoc(collection(db, "scores"), { name, time, timestamp: Date.now() });
+    console.log("Score saved!");
+  } catch (err) {
+    console.error("Error saving score:", err);
+  }
+}
+
+// Example displayScores function
+export async function displayScores() {
+  const scoreList = document.getElementById("high-scores");
+  scoreList.innerHTML = "";
+  try {
+    const q = query(collection(db, "scores"), orderBy("time"), limit(10));
+    const snapshot = await getDocs(q);
+    snapshot.forEach(doc => {
+      const li = document.createElement("li");
+      const data = doc.data();
+      li.textContent = `${data.name}: ${data.time} sec`;
+      scoreList.appendChild(li);
+    });
+  } catch (err) {
+    console.error("Error fetching scores:", err);
+  }
+}
 
 
