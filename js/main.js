@@ -262,14 +262,23 @@ scores.forEach((score, index) => {
 }
 
 // Add new score
+// Save score both locally and to Firebase
 function saveScore(name, time) {
-  let scores = JSON.parse(localStorage.getItem("highScores")) || [];
+  const score = { name, time, date: new Date() };
 
-  scores.push({ name, time });
-  scores.sort((a, b) => a.time - b.time); // lowest time first
-  scores = scores.slice(0, 10); // keep top 10
+  // 1️⃣ Save to LocalStorage (fallback)
+  let highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+  highScores.push(score);
+  highScores.sort((a, b) => a.time - b.time);
+  highScores = highScores.slice(0, 10); // keep top 10
+  localStorage.setItem("highScores", JSON.stringify(highScores));
 
-  localStorage.setItem("highScores", JSON.stringify(scores));
+  // 2️⃣ Save to Firebase (universal)
+  db.collection("scores").add(score)
+    .then(() => console.log("Score saved to Firebase"))
+    .catch(err => console.error("Error saving to Firebase:", err));
+
+  // 3️⃣ Update leaderboard display
   displayScores();
 }
   
