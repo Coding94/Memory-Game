@@ -22,6 +22,11 @@
   
 }
 
+.loading-score {
+  position: absolute;
+}
+  
+
 #high-scores {
   position: relative;
 }
