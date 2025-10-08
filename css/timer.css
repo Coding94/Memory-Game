@@ -22,11 +22,11 @@
   
 }
 
-#score-list {
+#high-score {
   position: relative;
 }
 
-#score-list li {
+#high-score li {
   
     text-align: left;      /* name left-aligned within li */
   list-style: none;
@@ -35,7 +35,7 @@
   padding-right: 120px;       /* space for the time on the right */
 }
 
-#score-list li .score-time {
+#high-score li .score-time {
   position: absolute;
   right: 10px;                /* distance from right edge of li */
   top: 50%;
@@ -43,7 +43,7 @@
 }
 
 
-#score-list {
+#high-score {
   background-color: #aa7a50;
   padding: 5px 10px;
   color: #816767;
