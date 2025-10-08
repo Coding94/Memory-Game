@@ -193,21 +193,6 @@ function resetTimer() {
   timerElement.textContent = "Time: 00:00:00";   // Reset display in HTML
 }
 
-// STORAGE
-
-// Save best time if it's better than previous
-function saveBestTime(seconds) {
-  const currentBest = localStorage.getItem("bestTime");
-  if (!currentBest || seconds < currentBest) {
-    localStorage.setItem("bestTime", seconds);
-  }
-}
-
-
-// Call this when the game ends
-function gameEnded() {
-  stopTimer();
-
   // Ask for player's name
   const playerName = prompt("You won! 🎉 Enter your name:");
   if (playerName) {
