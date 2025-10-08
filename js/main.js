@@ -1,7 +1,8 @@
 // main.js
 
 // Import Firebase setup and Firestore functions
-import { db, collection, getDocs, addDoc, query, orderBy, limit } from './firebase.js';
+import { db, collection, getDocs, addDoc, query, orderBy, limit, saveScore, displayScores } from './firebase.js';
+
 
 // Card data array (replace with your actual cards)
 import { cardsArray } from './data.js';
