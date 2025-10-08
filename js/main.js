@@ -59,7 +59,7 @@ createBoard(shuffledCards);
 // Flip card function
 function flipCard(card) {
 
-    if (!timerStarted) startTimer(); // Start timer on first click
+  if (!timerStarted) startTimer(); // Start timer on first click
 
   if (
     flippedCards.length < 2 &&
@@ -204,7 +204,7 @@ function resetTimer() {
 async function displayScores() {
   const ul = document.getElementById("high-scores");
   ul.innerHTML = "";
-    ul.innerHTML = `Loading scores...`; // Show loading message first
+    ul.innerHTML = `<li class="loading-score">Loading scores...</li>`; // Show loading message first
 
   try {
     const res = await fetch(`${SERVER_URL}/scores`);
@@ -230,6 +230,7 @@ async function displayScores() {
       ul.appendChild(li);
     });
   } catch (err) {
+    ul.innerHTML = `<li class="loading-score-error">Failed to load scores</li>`;
     console.error("Could not load scores from server:", err);
   }
 }
@@ -246,12 +247,6 @@ async function saveScore(name, time) {
     console.error("Could not save score to server:", err);
   }
 }
-  
-
-
-
-
-
 
 
 
