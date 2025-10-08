@@ -1,5 +1,5 @@
 // Define the unique cards
-const cardsArray = [
+export const cardsArray = [
   { name: "buffalo", img: "images/buffalo.png" },
   { name: "crocodile-2", img: "images/crocodile-2.png" },
   { name: "crocodile", img: "images/crocodile.png" },
