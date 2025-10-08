@@ -1,12 +1,6 @@
-// Import your initialized Firestore database from firebase.js
+// Import your Firebase database and Firestore functions
 import { db } from './firebase.js';
-
-// Import Firestore functions you actually use
 import { collection, addDoc, getDocs, query, orderBy, limit } from 'firebase/firestore';
-
-
-
-
 
 displayScores();
 
