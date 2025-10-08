@@ -22,10 +22,6 @@
   
 }
 
-.loading-score {
-  position: relative;
-}
-
 .loading-score-error {
   color:red
   position: relative;
@@ -45,7 +41,7 @@
   padding-right: 120px;       /* space for the time on the right */
 }
 
-#high-scores li .score-time {
+#high-scores li .score-time .loading-score {
   position: absolute;
   right: 10px;                /* distance from right edge of li */
   top: 50%;
