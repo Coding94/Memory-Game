@@ -1,10 +1,6 @@
-
-// import the db from your firebase.js
-import { db } from './firebase.js'; // <-- note the relative path!
-
+// firebase.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
-import { getFirestore, collection, getDocs, addDoc, query, orderBy, limit } 
-  from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "...",
@@ -16,6 +12,9 @@ const firebaseConfig = {
   measurementId: "..."
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+// Export Firestore instance
 export const db = getFirestore(app);
 
