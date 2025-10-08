@@ -213,16 +213,12 @@ function resetTimer() {
 
 // ===== HIGH SCORES =====
 
-// Display scores
-const SERVER_URL = "https://memory-game-update.onrender.com"; // Render URL
-
-// Display scores
 async function displayScores() {
   const ul = document.getElementById("high-scores");
   ul.innerHTML = "";
 
   try {
-    const res = await fetch('https://memory-game-update.onrender.com/scores'); // Render URL
+    const res = await fetch(`${SERVER_URL}/scores`);
     const scores = await res.json();
 
     scores.forEach((score, index) => {
@@ -247,19 +243,14 @@ async function displayScores() {
   }
 }
 
-// Save score
-// main.js — ONLY global scores
-
-// Call this when the game ends
 async function saveScore(name, time) {
   try {
-    await fetch('https://memory-game-update.onrender.com/scores', {  // Use your Render URL
+    await fetch(`${SERVER_URL}/scores`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, time })
     });
-    // Refresh the displayed scores
-    displayScores();
+    displayScores(); // refresh
   } catch (err) {
     console.error("Could not save score to server:", err);
   }
