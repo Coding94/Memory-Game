@@ -5,78 +5,73 @@
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
-  <!-- Place this where you want the timer to appear -->
-   <div class = "GAME">
-    <div id="timer-container">
-      <div id="timer">Time: 00:00:00</div>
-      <div class="score-list">
-        <ul id="high-scores">
-        <!-- JS will populate top 5 scores here -->
-      </ul>
+    <div class="GAME">
+      <div id="timer-container">
+        <div id="timer">Time: 00:00:00</div>
+        <div class="score-list">
+          <ul id="high-scores">
+            <!-- JS will populate top 5 scores here -->
+          </ul>
+        </div>
       </div>
-    </div>
 
-    <div class="game-board">
-
-      <!-- Example card (your JS will generate these) -->
-      <div class="card">
-        <div class="card-inner">
-          <div class="card-front"></div>
-          <div class="card-back"></div>
+      <div class="game-board">
+        <!-- Example card (your JS will generate these) -->
+        <div class="card">
+          <div class="card-inner">
+            <div class="card-front"></div>
+            <div class="card-back"></div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+
     <audio id="flipSound" src="sounds/flip-card.mov" preload="auto"></audio>
     <audio id="flipBackSound" src="sounds/flip-back.mov" preload="auto"></audio>
     <audio id="matchSound" src="sounds/match-card.wav" preload="auto"></audio>
     <audio id="doneSound" src="sounds/done.mp3" preload="auto"></audio>
 
+    <!-- Firebase setup (CDN) -->
     <script type="module">
-    // Firebase core
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-analytics.js";
-    import { getFirestore, collection, addDoc, getDocs, query, orderBy } 
-      from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-analytics.js";
+      import { getFirestore, collection, addDoc, getDocs, query, orderBy } 
+        from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
-<script type="module">
-  // Import Firebase modules directly from CDN
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-analytics.js";
-  import { getFirestore, collection, addDoc, getDocs, query, orderBy } 
-    from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+      const firebaseConfig = {
+        apiKey: "AIzaSyCglvnmMX7iPzVgbiQsGaGn6f0N5XGANWA",
+        authDomain: "memory-game-a8a17.firebaseapp.com",
+        projectId: "memory-game-a8a17",
+        storageBucket: "memory-game-a8a17.firebasestorage.app",
+        messagingSenderId: "786555569445",
+        appId: "1:786555569445:web:ca5b955d5d321058a786cc",
+        measurementId: "G-W76EJ9SK62"
+      };
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyCglvnmMX7iPzVgbiQsGaGn6f0N5XGANWA",
-    authDomain: "memory-game-a8a17.firebaseapp.com",
-    projectId: "memory-game-a8a17",
-    storageBucket: "memory-game-a8a17.firebasestorage.app",
-    messagingSenderId: "786555569445",
-    appId: "1:786555569445:web:ca5b955d5d321058a786cc",
-    measurementId: "G-W76EJ9SK62"
-  };
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      const db = getFirestore(app);
 
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  const db = getFirestore(app);
+      // Example function to save score
+      async function saveScore(name, score) {
+        try {
+          await addDoc(collection(db, "scores"), {
+            name,
+            score,
+            timestamp: Date.now()
+          });
+          console.log("Score saved!");
+        } catch (e) {
+          console.error("Error saving score: ", e);
+        }
+      }
 
-  // Example function to save score
-  async function saveScore(name, score) {
-    try {
-      await addDoc(collection(db, "scores"), {
-        name,
-        score,
-        timestamp: Date.now()
-      });
-      console.log("Score saved!");
-    } catch (e) {
-      console.error("Error saving score: ", e);
-    }
-  }
-</script>
-    
+      // Expose db and saveScore to global scope so your main.js can use them
+      window.db = db;
+      window.saveScore = saveScore;
+    </script>
+
     <script src="js/data.js"></script>
     <script type="module" src="js/main.js"></script>
-
   </body>
 </html>
