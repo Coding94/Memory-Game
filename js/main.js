@@ -146,5 +146,19 @@ if (matchedCards.length === cardsArray.length * 2) {
     const playerName = prompt(`You finished in ${formatTime(seconds)}! Enter your name:`);
     if (playerName) saveScore(playerName, seconds);
     if (confirm("Play again?")) resetGame();
-  }, 500);
+   }, 500);
+ }
+} // <-- closes checkForMatch()
+
+// RESET GAME FUNCTION
+function resetGame() {
+  resetTimer();
+  shuffledCards = shuffle([...cardsArray, ...cardsArray]);
+  createBoard(shuffledCards);
 }
+
+// EXPORT SCORE FUNCTIONS (if using Firebase/localStorage)
+export { saveScore, displayScores };
+
+// INITIAL SCORE DISPLAY
+displayScores();
