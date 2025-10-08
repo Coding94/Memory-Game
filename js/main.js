@@ -259,6 +259,16 @@ async function displayScores() {
   }
 }
 
+// Save score locally
+function saveLocalScore(name, time) {
+  let scores = JSON.parse(localStorage.getItem("highScores")) || [];
+  scores.push({ name, time });
+  scores.sort((a, b) => a.time - b.time);
+  scores = scores.slice(0, 10); // keep top 10
+  localStorage.setItem("highScores", JSON.stringify(scores));
+  displayScores();
+}
+
 // Save new score to the server
 async function saveScore(name, time) {
   try {
