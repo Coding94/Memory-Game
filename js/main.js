@@ -207,7 +207,6 @@ function resetTimer() {
     }
   }, 500);
 
-
 // SCORE
 
 // ===== HIGH SCORES =====
