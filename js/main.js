@@ -139,7 +139,12 @@ function checkForMatch() {
 
   flippedCards = [];
 
-  if (matchedCards.length === cardsArray.length * 2) {
-    doneSound.play();
-    stopTime
-  }
+if (matchedCards.length === cardsArray.length * 2) {
+  doneSound.play();
+  stopTimer(); // <-- fixed typo
+  setTimeout(() => {
+    const playerName = prompt(`You finished in ${formatTime(seconds)}! Enter your name:`);
+    if (playerName) saveScore(playerName, seconds);
+    if (confirm("Play again?")) resetGame();
+  }, 500);
+}
