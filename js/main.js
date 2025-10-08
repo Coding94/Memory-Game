@@ -233,33 +233,38 @@ function gameEnded() {
 // ===== HIGH SCORES =====
 
 // Display scores
-function displayScores() {
-  const scores = JSON.parse(localStorage.getItem("highScores")) || [];
-  const ul = document.getElementById("high-scores");
-  ul.innerHTML = "";
+// Display top scores from Firebase, fallback to LocalStorage
+async function displayScores() {
+  const scoreList = document.getElementById("score-list");
+  scoreList.innerHTML = "";
 
-scores.forEach((score, index) => {
-  const li = document.createElement("li");
+  try {
+    // 1️⃣ Fetch top 10 scores from Firebase, sorted by time
+    const snapshot = await db.collection("scores")
+      .orderBy("time")
+      .limit(10)
+      .get();
 
-  // Index span (fixed width)
-  const indexSpan = document.createElement("span");
-  indexSpan.classList.add("score-index");
-  indexSpan.textContent = `${index + 1}.`;
+    const globalScores = snapshot.docs.map(doc => doc.data());
 
-  // Time span
-  const timeSpan = document.createElement("span");
-  timeSpan.classList.add("score-time");
-  timeSpan.textContent = formatTime(score.time);
+    globalScores.forEach(s => {
+      const li = document.createElement("li");
+      li.textContent = `${s.name}: ${formatTime(s.time)}`;
+      scoreList.appendChild(li);
+    });
 
-  // Append index, name, and time
-  li.appendChild(indexSpan);
-  li.appendChild(document.createTextNode(` ${score.name}`));
-  li.appendChild(timeSpan);
-
-  document.getElementById("high-scores").appendChild(li);
-});
-
+  } catch (err) {
+    // 2️⃣ If offline or Firebase fails, use LocalStorage
+    console.error("Using local scores (offline):", err);
+    const localScores = JSON.parse(localStorage.getItem("highScores")) || [];
+    localScores.forEach(s => {
+      const li = document.createElement("li");
+      li.textContent = `${s.name}: ${formatTime(s.time)}`;
+      scoreList.appendChild(li);
+    });
+  }
 }
+
 
 // Add new score
 // Save score both locally and to Firebase
