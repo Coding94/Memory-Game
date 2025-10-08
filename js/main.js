@@ -54,11 +54,6 @@ function createBoard(cards) {
 // Initial board setup
 createBoard(shuffledCards);
 
-// Shuffle function
-function shuffle(array) {
-  return array.sort(() => 0.5 - Math.random());
-}
-
 // Flip card function
 function flipCard(card) {
 
