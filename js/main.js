@@ -142,3 +142,4 @@ function checkForMatch() {
   if (matchedCards.length === cardsArray.length * 2) {
     doneSound.play();
     stopTime
+  }
