@@ -22,7 +22,14 @@
   
 }
 
-.loading-score-error {
+.loading-score {
+  display: inline-block;
+  width: 30px;        /* enough for 1–10 */
+  text-align: right;  /* aligns the dot neatly */
+  margin-right: 5px;
+}
+
+.loading-score .loading-score-error {
   color:red;
 }
   
@@ -40,7 +47,7 @@
   padding-right: 120px;       /* space for the time on the right */
 }
 
-#high-scores li .score-time .loading-score {
+#high-scores li .score-time {
   position: absolute;
   right: 10px;                /* distance from right edge of li */
   top: 50%;
