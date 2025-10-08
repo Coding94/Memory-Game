@@ -23,12 +23,12 @@
 }
 
 .loading-score {
-  position: absolute;
+  position: relative;
 }
 
-.loading-score {
+.loading-score-error {
   color:red
-  position: absolute;
+  position: relative;
 }
   
 
