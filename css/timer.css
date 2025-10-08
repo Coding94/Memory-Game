@@ -62,7 +62,7 @@
 }
 
 
-.loading-score {
+.loading-score li {
   display: inline-block;
   font-family:'Courier New', monospace;
   text-align: center;
