@@ -3,10 +3,6 @@ const SERVER_URL = "https://memory-game-update.onrender.com";
 
 displayScores();
 
-// Clear local storage completely (optional: only specific keys)
-localStorage.removeItem("highScores");
-localStorage.removeItem("bestTime");
-
 
 // Select the game board
 const board = document.querySelector(".game-board");
