@@ -31,46 +31,6 @@
     <audio id="matchSound" src="sounds/match-card.wav" preload="auto"></audio>
     <audio id="doneSound" src="sounds/done.mp3" preload="auto"></audio>
 
-    <!-- Firebase setup (CDN) -->
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-      import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-analytics.js";
-      import { getFirestore, collection, addDoc, getDocs, query, orderBy } 
-        from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
-
-      const firebaseConfig = {
-        apiKey: "AIzaSyCglvnmMX7iPzVgbiQsGaGn6f0N5XGANWA",
-        authDomain: "memory-game-a8a17.firebaseapp.com",
-        projectId: "memory-game-a8a17",
-        storageBucket: "memory-game-a8a17.firebasestorage.app",
-        messagingSenderId: "786555569445",
-        appId: "1:786555569445:web:ca5b955d5d321058a786cc",
-        measurementId: "G-W76EJ9SK62"
-      };
-
-      const app = initializeApp(firebaseConfig);
-      const analytics = getAnalytics(app);
-      const db = getFirestore(app);
-
-      // Example function to save score
-      async function saveScore(name, score) {
-        try {
-          await addDoc(collection(db, "scores"), {
-            name,
-            score,
-            timestamp: Date.now()
-          });
-          console.log("Score saved!");
-        } catch (e) {
-          console.error("Error saving score: ", e);
-        }
-      }
-
-      // Expose db and saveScore to global scope so your main.js can use them
-      window.db = db;
-      window.saveScore = saveScore;
-    </script>
-
     <script src="js/data.js"></script>
     <script type="module" src="js/main.js"></script>
   </body>
