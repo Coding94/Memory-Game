@@ -1,7 +1,7 @@
-// Import Firebase
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore"; // <-- Firestore
-import { getAnalytics } from "firebase/analytics";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-analytics.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
 
 // Your Firebase config
 const firebaseConfig = {
