@@ -257,7 +257,7 @@ function renderScores(scores) {
   });
 }
 
-async function displayScores() {
+export async function displayScores() {
   const scoreList = document.getElementById("high-scores");
   scoreList.innerHTML = "";
 
@@ -285,8 +285,6 @@ async function displayScores() {
     });
   }
 }
-
-
 
 
 // Add new score
