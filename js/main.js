@@ -193,20 +193,6 @@ function resetTimer() {
   timerElement.textContent = "Time: 00:00:00";   // Reset display in HTML
 }
 
-  // Ask for player's name
-  const playerName = prompt("You won! 🎉 Enter your name:");
-  if (playerName) {
-    saveScore(playerName, seconds);
-  }
-
-  setTimeout(() => {
-    const playAgain = confirm("Do you want to play again?");
-    if (playAgain) {
-      resetTimer();
-      createBoard(shuffle([...cardsArray, ...cardsArray]));
-    }
-  }, 500);
-
 // SCORE
 
 // ===== HIGH SCORES =====
