@@ -237,7 +237,7 @@ async function displayScores() {
   ul.innerHTML = "";
 
   try {
-    const res = await fetch(`${SERVER_URL}/scores`);
+    const res = await fetch('https://memory-game-update.onrender.com/scores'); // Render URL
     const scores = await res.json();
 
     scores.forEach((score, index) => {
@@ -263,13 +263,17 @@ async function displayScores() {
 }
 
 // Save score
+// main.js — ONLY global scores
+
+// Call this when the game ends
 async function saveScore(name, time) {
   try {
-    await fetch(`${SERVER_URL}/scores`, {
+    await fetch('https://memory-game-update.onrender.com/scores', {  // Use your Render URL
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, time })
     });
+    // Refresh the displayed scores
     displayScores();
   } catch (err) {
     console.error("Could not save score to server:", err);
