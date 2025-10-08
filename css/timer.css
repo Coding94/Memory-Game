@@ -21,17 +21,6 @@
   gap: 0;         /* space between timer and best time */
   
 }
-
-.loading-score {
-  display: inline-block;
-  width: 30px;        /* enough for 1–10 */
-  text-align: right;  /* aligns the dot neatly */
-  margin-right: 5px;
-}
-
-.loading-score .loading-score-error {
-  color:red;
-}
   
 
 #high-scores {
@@ -71,5 +60,16 @@
   width: 30px;        /* enough for 1–10 */
   text-align: right;  /* aligns the dot neatly */
   margin-right: 5px;
+}
+
+.loading-score {
+  display: inline-block;
+  width: 30px;        /* enough for 1–10 */
+  text-align: right;  /* aligns the dot neatly */
+  margin-right: 5px;
+}
+
+.loading-score .loading-score-error {
+  color:red;
 }
 
