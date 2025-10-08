@@ -265,14 +265,24 @@ async function displayScores() {
       .get();
 
     const globalScores = snapshot.docs.map(doc => doc.data());
-    renderScores(globalScores);
+
+    globalScores.forEach(s => {
+      const li = document.createElement("li");
+      li.textContent = `${s.name}: ${formatTime(s.time)}`;
+      scoreList.appendChild(li);
+    });
 
   } catch (err) {
     console.error("Using local scores (offline):", err);
     const localScores = JSON.parse(localStorage.getItem("highScores")) || [];
-    renderScores(localScores);
+    localScores.forEach(s => {
+      const li = document.createElement("li");
+      li.textContent = `${s.name}: ${formatTime(s.time)}`;
+      scoreList.appendChild(li);
+    });
   }
 }
+
 
 
 
