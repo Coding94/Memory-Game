@@ -1,6 +1,16 @@
-const q = query(collection(db, "scores"), orderBy("time"), limit(10));
-const snapshot = await getDocs(q);
-await addDoc(collection(db, "scores"), score);
+// Firebase Firestore functions
+import { 
+  collection, 
+  getDocs, 
+  addDoc, 
+  query, 
+  orderBy, 
+  limit 
+} from "firebase/firestore";
+
+// Your initialized Firestore database
+import { db } from "./firebase"; // adjust path if your firebase.js is elsewhere
+
 
 
 displayScores();
