@@ -63,8 +63,8 @@
 
 
 .loading-score {
+  display: inline-block;
   font-family:'Courier New', monospace;
-  color: #888;
   text-align: center;
 }
 
