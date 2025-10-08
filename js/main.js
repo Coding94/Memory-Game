@@ -272,7 +272,8 @@ function saveLocalScore(name, time) {
 // Save new score to the server
 async function saveScore(name, time) {
   try {
-    await fetch('http://localhost:3000/scores', {
+
+    await fetch('https://memory-game-server.onrender.com/scores', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, time })
