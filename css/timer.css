@@ -62,11 +62,15 @@
   margin-right: 5px;
 }
 
-#timer .loading-score{
+#timer {
+  position: relative; /* Make #timer the positioned ancestor */
+}
+
+.loading-score{
   position: absolute;
 }
 
-#timer .loading-score-error{
+.loading-score-error{
   position: absolute;
 }
 
