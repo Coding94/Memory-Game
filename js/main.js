@@ -203,7 +203,7 @@ function resetTimer() {
 
 async function displayScores() {
   const ul = document.getElementById("high-scores");
-  ul.innerHTML =`<span class="loading-score">Loading scores...</span>`;
+  ul.innerHTML =`<li class="loading-score">Loading scores...<li>`;
     //ul.innerHTML = `<li class="loading-score">Loading scores...</li>`; // Show loading message first
 
   try {
