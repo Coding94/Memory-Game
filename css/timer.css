@@ -63,14 +63,14 @@
 }
 
 .loading-score{
+  display: inline-block;
+  width: auto;
   margin-left: 40px;
   margin-right: 5px;
 }
 
-.loading-score-error{
+.loading-score .loading-score-error{
   color: red;
-  margin-left: 40px;
-  margin-right: 5px;
 }
 
 
