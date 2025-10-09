@@ -230,7 +230,7 @@ async function displayScores() {
       ul.appendChild(li);
     });
   } catch (err) {
-   // ul.innerHTML = `<li class="loading-score-error">Failed to load scores</li>`;
+   ul.innerHTML = `<li class="loading-score-error">Failed to load scores</li>`;
     console.error("Could not load scores from server:", err);
   }
 }
