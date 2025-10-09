@@ -62,7 +62,7 @@
   margin-right: 5px;
 }
 
-loading-score {
+.loading-score {
   display: inline-block;
   font-family: 'Courier New', monospace;
   text-align: center;
