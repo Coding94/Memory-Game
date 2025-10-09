@@ -68,6 +68,7 @@
 }
 
 .loading-score-error{
+  color: red;
   margin-left: 40px;
   margin-right: 5px;
 }
