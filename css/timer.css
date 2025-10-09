@@ -63,8 +63,13 @@
 }
 
 .loading-score{
+  margin-left: 40px;
   margin-right: 5px;
 }
-  
+
+.loading-score-error{
+  margin-left: 40px;
+  margin-right: 5px;
+}
 
 
