@@ -62,7 +62,7 @@
   margin-right: 5px;
 }
 
-#timer {
+#timer-container {
   position: relative; /* Make #timer the positioned ancestor */
 }
 
