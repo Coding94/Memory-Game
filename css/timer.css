@@ -64,10 +64,11 @@
 
 .loading-score{
   display: inline-block;
-  margin-right: -80px;
+  margin-right: -100px;
+  text-align: centre;
 }
 
-.loading-score .loading-score-error{
+.loading-score, .loading-score-error{
   color: red;
 }
 
