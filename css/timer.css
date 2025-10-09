@@ -62,16 +62,10 @@
   margin-right: 5px;
 }
 
-#timer-container {
-  position: relative; /* Make #timer the positioned ancestor */
-}
-
 .loading-score{
-  position: absolute;
 }
 
 .loading-score-error{
-  position: absolute;
 }
 
 
