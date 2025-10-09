@@ -62,13 +62,23 @@
   margin-right: 5px;
 }
 
-.loading-score{
+loading-score {
   display: inline-block;
-  margin-right: -100px;
+  font-family: 'Courier New', monospace;
+  text-align: center;
+  color: #745757;
+  background-color: #6a8e64;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-left: 40px;
+  margin-right: 5px;
+  width: auto; /* Let the width be determined by the content */
 }
 
-.loading-score, .loading-score-error{
+.loading-score-error {
   color: red;
+  margin-left: 40px;
+  margin-right: 5px;
 }
 
 
